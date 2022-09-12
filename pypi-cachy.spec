@@ -4,7 +4,7 @@
 #
 Name     : pypi-cachy
 Version  : 0.3.0
-Release  : 9
+Release  : 10
 URL      : https://files.pythonhosted.org/packages/a0/0c/45b249b0efce50a430b8810ec34c5f338d853c31c24b0b297597fd28edda/cachy-0.3.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/a0/0c/45b249b0efce50a430b8810ec34c5f338d853c31c24b0b297597fd28edda/cachy-0.3.0.tar.gz
 Summary  : Cachy provides a simple yet effective caching library.
@@ -61,7 +61,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656363312
+export SOURCE_DATE_EPOCH=1663026230
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -86,7 +86,7 @@ popd
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-cachy
-cp %{_builddir}/cachy-0.3.0/LICENSE %{buildroot}/usr/share/package-licenses/pypi-cachy/98a929dd0a579b9761599bc34c800296ad986dcd
+cp %{_builddir}/cachy-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-cachy/98a929dd0a579b9761599bc34c800296ad986dcd || :
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -99,6 +99,8 @@ export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
 pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
 popd
+## Remove excluded files
+rm -f %{buildroot}*/usr/lib/python3*/site-packages/tests/__pycache__/*
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
