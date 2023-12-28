@@ -2,3 +2,5 @@
 # names, one per line.
 
 /usr/lib/python3*/site-packages/tests/__pycache__/*
+/usr/lib/python*/site-packages/tests/__init__.py
+/usr/lib/python*/site-packages/tests/__pycache__/__init__.cpython-*.pyc
